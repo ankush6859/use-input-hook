@@ -29,7 +29,6 @@ const BasicForm = (props) => {
   } = useInput((val) => val.trim() !== '' && val.includes('@'));
 
   let isFormValid = false;
-  console.log(fNameValueIsValid && lNameValueIsValid && emailIsValid);
 
   if (fNameValueIsValid && lNameValueIsValid && emailIsValid) {
     isFormValid = true;
