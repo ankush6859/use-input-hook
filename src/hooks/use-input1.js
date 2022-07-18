@@ -1,13 +1,11 @@
 import { useState } from 'react';
 
-const useInput = (validateFn) => {
+const useInput = (validateValue) => {
   const [enteredValue, setEnteredValue] = useState('');
   const [isTouched, setIsTouched] = useState(false);
 
-  const valueIsValid = validateFn(enteredValue);
-  const inputHasError = !valueIsValid && isTouched;
-
-  //   console.log(inputHasError);
+  const valueIsValid = validateValue(enteredValue);
+  const hasError = !valueIsValid && isTouched;
 
   const valueChangeHandler = (e) => {
     setEnteredValue(e.target.value);
@@ -17,18 +15,18 @@ const useInput = (validateFn) => {
     setIsTouched(true);
   };
 
-  const inputResetHandler = () => {
+  const resetInput = () => {
     setEnteredValue('');
     setIsTouched(false);
   };
 
   return {
     value: enteredValue,
-    valueIsValid,
-    inputHasError,
+    isValid: valueIsValid,
+    hasError,
+    resetInput,
     valueChangeHandler,
     inputBlurHandler,
-    inputResetHandler,
   };
 };
 
